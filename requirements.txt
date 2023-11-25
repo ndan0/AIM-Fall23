@@ -41,11 +41,13 @@ seaborn>=0.11.0
 # Deploy ----------------------------------------------------------------------
 setuptools>=65.5.1 # Snyk vulnerability fix
 # tritonclient[all]~=2.24.0
-streamlit
-streamlit-webrtc
 
 # Extras ----------------------------------------------------------------------
 # ipython  # interactive notebook
 # mss  # screenshots
 # albumentations>=1.0.3
 # pycocotools>=2.0.6  # COCO mAP
+
+# Front end -------------------------------------------------------------------
+flask
+flask-cors

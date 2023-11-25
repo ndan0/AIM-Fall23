@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+    <!-- Any additional CSS or stylesheets can be linked here -->
+    <style>
+        /* Add any custom styles for your image gallery */
+        .image-container {
+            display: inline-block;
+            margin: 10px;
+        }
+        .image-container img {
+            max-width: 200px; /* Adjust the maximum width of the displayed images */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+
+    <div class="gallery">
+        {% for image in image_files %}
+            <div class="image-container">
+                <img src="{{ url_for('static', filename=image) }}" alt="Image">
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Any additional scripts or JavaScript can be included here -->
+    <script>
+        // Reload the page every 5 seconds (5000 milliseconds)
+        setInterval(function() {
+            location.reload();
+        }, 1000);
+    </script>
+
+</body>
+</html>
