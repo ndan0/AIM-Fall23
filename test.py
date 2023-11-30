@@ -33,7 +33,7 @@ while True:
     if spacePressed and time.time() - last_time > 1:
         last_time = time.time()
         run(
-            weights='best.pt',  # model.pt path(s)
+            weights='BestWeight.pt',  # model.pt path(s)
             source="frame.jpg",  # file/dir/URL/glob, 0 for webcam
             save_txt=True,  # save results to *.txt
             project = 'output',
@@ -41,27 +41,35 @@ while True:
         )
         # Read the output file
         # CHeck if output/exp/labels have a txt file called frame.txt
+        #Get the latest exp folder "exp10" for example
         if os.path.isfile('output/exp/labels/frame.txt'):
             # Open the file
             file = open('output/exp/labels/frame.txt', 'r')
+
+            shutil.move('output/exp/frame.jpg', f'output_temp/frame{imgCount}.jpg')
             # Read all the lines
             lines = file.readlines()
             # Print the lines
-            eyes_open = False
+            imgCount+=1
+            eyesReady = True
+            
+            faceVisible = False
+
             for line in lines:
                 print(line)
+                if line.startswith('0'):
+                    eyesReady = False
+                # if line[0] == 1:
+                #     faceVisible = True
                 
+
             #TODO: Do custom stuff with the lines to save the image
-                firstChar = line[0]
-                if firstChar == "2":
-                    eyes_closed = True
-                
+
             # Save the image
-            if eyes_closed:
-                cv2.imwrite(f'./static/frame{imgCount}.jpg', frame)
-                imgCount += 1
+            if eyesReady:
+                cv2.imwrite(f'./static/valid{imgCount}.jpg', frame)
                 spacePressed = False
-            
+
 
             # Close the file
             file.close()
