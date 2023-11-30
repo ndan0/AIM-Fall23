@@ -19,6 +19,7 @@ imgCount = 0
 # Create the input folder
 os.mkdir('./static')
 
+
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
