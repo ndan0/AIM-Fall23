@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 def display_images():
-    image_folder = '.\\static'  # Replace with the path to your image folder
+    image_folder = './static'  # Replace with the path to your image folder
 
     image_files = []
     for filename in os.listdir(image_folder):

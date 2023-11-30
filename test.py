@@ -27,6 +27,7 @@ while True:
     cv2.imshow('Webcam', frame)
 
     # Run YOLOv5 every 1 second
+    
     if time.time() - last_time > 1:
         last_time = time.time()
         run(
@@ -34,28 +35,39 @@ while True:
             source="frame.jpg",  # file/dir/URL/glob, 0 for webcam
             save_txt=True,  # save results to *.txt
             project = 'output',
-            nosave=True,  # do not save images/videos
+            #nosave=True,  # do not save images/videos
         )
         # Read the output file
         # CHeck if output/exp/labels have a txt file called frame.txt
         if os.path.isfile('output/exp/labels/frame.txt'):
             # Open the file
             file = open('output/exp/labels/frame.txt', 'r')
+
+            shutil.move('output/exp/frame.jpg', f'output_temp/frame{imgCount}.jpg')
             # Read all the lines
             lines = file.readlines()
             # Print the lines
+            imgCount+=1
+            eyesReady = True
+            faceVisible = False
+
             for line in lines:
                 print(line)
+                if line.startswith('0'):
+                    eyesReady = False
+                # if line[0] == 1:
+                #     faceVisible = True
+                
 
             #TODO: Do custom stuff with the lines to save the image
 
             # Save the image
-            
-            cv2.imwrite(f'./static/frame{imgCount}.jpg', frame)
-            imgCount += 1
-
+            if eyesReady:
+                cv2.imwrite(f'./static/valid{imgCount}.jpg', frame)
+                
+                fileExists = False
             # Close the file
-            file.close()
+                file.close()
 
         shutil.rmtree('./output', ignore_errors=True)
 
