@@ -51,7 +51,7 @@ while True:
             lines = file.readlines()
             # Print the lines
             imgCount+=1
-            eyesReady = True
+            eyesReady = False
             
             faceVisible = False
 
@@ -59,8 +59,8 @@ while True:
                 print(line)
                 if line.startswith('0'):
                     eyesReady = False
-                # if line[0] == 1:
-                #     faceVisible = True
+                elif line.startswith('2'):
+                    eyesReady = True
                 
 
             #TODO: Do custom stuff with the lines to save the image
